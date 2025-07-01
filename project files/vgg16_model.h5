@@ -1,0 +1,170 @@
+# VGG16 Model Configuration for Butterfly Classification
+# This file contains the model architecture and training configuration
+
+import os
+
+class VGG16ModelConfig:
+    """Configuration class for VGG16 butterfly classification model"""
+    
+    def __init__(self):
+        self.model_name = "vgg16_butterfly_classifier"
+        self.input_shape = (224, 224, 3)
+        self.num_classes = None  # Set during training
+        self.batch_size = 32
+        self.epochs = 20
+        self.learning_rate = 0.0001
+        self.validation_split = 0.2
+        
+        # Model file paths
+        self.model_save_path = "vgg16_model.h5"
+        self.weights_save_path = "vgg16_weights.h5"
+        self.config_save_path = "model_config.json"
+        
+        # Training parameters
+        self.early_stopping_patience = 5
+        self.reduce_lr_patience = 3
+        self.reduce_lr_factor = 0.5
+        self.min_lr = 1e-7
+        
+        # Data augmentation parameters
+        self.rotation_range = 20
+        self.width_shift_range = 0.2
+        self.height_shift_range = 0.2
+        self.horizontal_flip = True
+        self.zoom_range = 0.2
+        self.shear_range = 0.2
+        self.fill_mode = 'nearest'
+        self.brightness_range = [0.8, 1.2]
+    
+    def get_model_info(self):
+        """Return model information"""
+        return {
+            "model_name": self.model_name,
+            "architecture": "VGG16 Transfer Learning",
+            "input_shape": self.input_shape,
+            "framework": "TensorFlow/Keras",
+            "purpose": "Butterfly Species Classification"
+        }
+    
+    def model_exists(self):
+        """Check if trained model file exists"""
+        return os.path.exists(self.model_save_path)
+    
+    def get_model_status(self):
+        """Get current model status"""
+        if self.model_exists():
+            file_size = os.path.getsize(self.model_save_path)
+            return {
+                "status": "Available",
+                "file_path": self.model_save_path,
+                "file_size_mb": round(file_size / (1024 * 1024), 2),
+                "ready_for_prediction": True
+            }
+        else:
+            return {
+                "status": "Not Found",
+                "file_path": self.model_save_path,
+                "file_size_mb": 0,
+                "ready_for_prediction": False,
+                "message": "Model needs to be trained first"
+            }
+
+# Model configuration instance
+model_config = VGG16ModelConfig()
+
+# Butterfly species information database
+BUTTERFLY_SPECIES_INFO = {
+    "monarch": {
+        "name": "Monarch Butterfly",
+        "scientific_name": "Danaus plexippus",
+        "description": "Famous for their incredible migration patterns and distinctive orange and black wings.",
+        "habitat": "Open fields, meadows, gardens, and roadsides",
+        "wingspan": "8.9-10.2 cm",
+        "characteristics": ["Orange wings with black borders", "Black veins", "White spots along borders"]
+    },
+    "swallowtail": {
+        "name": "Swallowtail Butterfly",
+        "scientific_name": "Papilio species",
+        "description": "Large, colorful butterflies with distinctive tail-like extensions on their hindwings.",
+        "habitat": "Gardens, parks, woodlands, and meadows",
+        "wingspan": "7.5-12.5 cm",
+        "characteristics": ["Large size", "Tail-like extensions", "Bright colors", "Strong flight pattern"]
+    },
+    "blue_morpho": {
+        "name": "Blue Morpho",
+        "scientific_name": "Morpho peleides",
+        "description": "Brilliant blue tropical butterflies known for their iridescent wings.",
+        "habitat": "Tropical rainforests of South and Central America",
+        "wingspan": "12.7-20.3 cm",
+        "characteristics": ["Brilliant blue color", "Iridescent wings", "Large size", "Brown underside"]
+    },
+    "painted_lady": {
+        "name": "Painted Lady",
+        "scientific_name": "Vanessa cardui",
+        "description": "One of the most widespread butterflies, found on every continent except Antarctica.",
+        "habitat": "Gardens, fields, and open areas worldwide",
+        "wingspan": "5.1-7.3 cm",
+        "characteristics": ["Orange and black markings", "White spots", "Migratory behavior", "Global distribution"]
+    },
+    "cabbage_white": {
+        "name": "Cabbage White",
+        "scientific_name": "Pieris rapae",
+        "description": "Common white butterflies often seen in gardens and agricultural areas.",
+        "habitat": "Gardens, agricultural areas, and open fields",
+        "wingspan": "4.6-6.6 cm",
+        "characteristics": ["White wings", "Black spots", "Common in gardens", "Active during day"]
+    }
+}
+
+def get_species_info(species_key):
+    """Get detailed information about a butterfly species"""
+    return BUTTERFLY_SPECIES_INFO.get(species_key.lower(), {
+        "name": species_key.title(),
+        "description": "Beautiful butterfly species with unique characteristics.",
+        "habitat": "Various environments depending on species",
+        "characteristics": ["Unique wing patterns", "Species-specific coloration"]
+    })
+
+def get_all_species():
+    """Get list of all available species"""
+    return list(BUTTERFLY_SPECIES_INFO.keys())
+
+# Model training status
+class TrainingStatus:
+    def __init__(self):
+        self.is_training = False
+        self.current_epoch = 0
+        self.total_epochs = 0
+        self.current_loss = 0.0
+        self.current_accuracy = 0.0
+        self.best_accuracy = 0.0
+        self.training_complete = False
+    
+    def update_status(self, epoch, loss, accuracy):
+        """Update training status"""
+        self.current_epoch = epoch
+        self.current_loss = loss
+        self.current_accuracy = accuracy
+        if accuracy > self.best_accuracy:
+            self.best_accuracy = accuracy
+    
+    def start_training(self, total_epochs):
+        """Start training session"""
+        self.is_training = True
+        self.total_epochs = total_epochs
+        self.current_epoch = 0
+        self.training_complete = False
+    
+    def complete_training(self):
+        """Mark training as complete"""
+        self.is_training = False
+        self.training_complete = True
+    
+    def get_progress(self):
+        """Get training progress percentage"""
+        if self.total_epochs == 0:
+            return 0
+        return (self.current_epoch / self.total_epochs) * 100
+
+# Global training status instance
+training_status = TrainingStatus()
