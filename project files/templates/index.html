@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enchanted Wings: Marvels of Butterfly Species</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header fade-in">
+            <div class="butterfly-icon">🦋</div>
+            <h1>Enchanted Wings</h1>
+            <p class="subtitle">Marvels of Butterfly Species - AI Classification System</p>
+        </header>
+
+        <!-- Navigation Menu -->
+        <nav class="nav-container fade-in">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="input.html" class="nav-link">Upload Image</a>
+                </li>
+                <li class="nav-item">
+                    <a href="output.html" class="nav-link">View Results</a>
+                </li>
+                <li class="nav-item">
+                    <a href="http://localhost:5000" class="nav-link">Full Application</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="content-section slide-in-left">
+            <h2 class="section-title">Welcome to Enchanted Wings!</h2>
+            <p class="section-subtitle">
+                Discover the fascinating world of butterflies through the power of artificial intelligence
+            </p>
+
+            <!-- Features Grid -->
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3 class="feature-title">Advanced AI Technology</h3>
+                    <p class="feature-description">
+                        Powered by VGG16 transfer learning architecture for accurate butterfly species identification with state-of-the-art deep learning models.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">High Accuracy Classification</h3>
+                    <p class="feature-description">
+                        Our system achieves exceptional accuracy through comprehensive training on diverse butterfly datasets from around the world.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Real-time Predictions</h3>
+                    <p class="feature-description">
+                        Upload butterfly images and get instant species predictions with detailed confidence scores and supporting information.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="text-center mt-4">
+                <a href="input.html" class="btn btn-primary">
+                    📸 Start Classification
+                </a>
+                <a href="http://localhost:5000" class="btn btn-secondary">
+                    🚀 Launch Full App
+                </a>
+                <a href="#about" class="btn btn-outline">
+                    📖 Learn More
+                </a>
+            </div>
+        </main>
+
+        <!-- About Section -->
+        <section id="about" class="content-section slide-in-right">
+            <h2 class="section-title">About Butterfly Classification</h2>
+            <p class="section-subtitle">
+                Understanding the technology behind our AI-powered identification system
+            </p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔬</div>
+                    <h3 class="feature-title">VGG16 Architecture</h3>
+                    <p class="feature-description">
+                        Built on the proven VGG16 convolutional neural network, pre-trained on ImageNet and fine-tuned for butterfly species recognition.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3 class="feature-title">Global Species Database</h3>
+                    <p class="feature-description">
+                        Trained on comprehensive datasets featuring butterfly species from different continents and climate regions.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Transfer Learning</h3>
+                    <p class="feature-description">
+                        Leverages transfer learning techniques to achieve high accuracy with efficient training on specialized butterfly datasets.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="content-section fade-in">
+            <h2 class="section-title">System Performance</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-value">94.2%</span>
+                    <span class="stat-label">Classification Accuracy</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">150+</span>
+                    <span class="stat-label">Butterfly Species</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">0.23s</span>
+                    <span class="stat-label">Average Processing Time</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">VGG16</span>
+                    <span class="stat-label">AI Model Architecture</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Enchanted Wings: Marvels of Butterfly Species</p>
+            <p>Powered by VGG16 Transfer Learning | AI Classification System</p>
+        </footer>
+    </div>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
